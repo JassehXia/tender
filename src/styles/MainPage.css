@@ -1,3 +1,14 @@
+.swipingPage {
+  position: relative;
+  background-color: #121212;
+  min-height: 100vh;
+  color: white;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .upperBox {
   position: absolute;
   top: 5vh;
@@ -7,18 +18,19 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  border: 1px solid black;
-  height: 20vh;
-  width: 50%;
   text-align: center;
 }
 
 .title {
-  flex: auto;
-  justify-content: center;
-  align-items: center;
-  font-size: 40px;
+  font-size: 3rem;
   text-align: center;
+  touch-action: none;
+}
+
+.subtitle {
+  font-size: 1rem;
+  color: #ccc;
+  margin-top: 10px;
 }
 
 .cardBox {
@@ -26,70 +38,115 @@
   top: 30vh;
   left: 50%;
   transform: translateX(-50%);
-  flex: auto;
+  display: flex;
   justify-content: center;
   align-items: center;
-  display: flex;
-  flex-direction: column;
-
-  height: 60vh;
   width: 25%;
+  height: 60vh;
 }
 
+.card {
+  transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s;
+  background-color: #1e1e1e;
+  color: #fff;
+  user-select: none;
+  /* Prevent text selection */
+  pointer-events: auto;
+  /* Keep click events working but text won't be selected */
+  touch-action: pan-y;
+  width: 300px;
+  height: 400px;
+  border-radius: 16px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 15px;
+  overflow: hidden;
+}
+
+.card:hover {
+  transform: scale(1.03);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+}
 
 .cardTitle {
   font-size: 1.5rem;
-  margin-bottom: 1rem;
+  margin: 10px 0 5px;
 }
 
 .cardImage {
-  width: 200px;
+  width: 250px;
   height: 200px;
   object-fit: cover;
-  margin-bottom: 1rem;
+  border-radius: 12px;
+  margin-bottom: 10px;
   user-select: none;
   pointer-events: none;
 }
 
 .cardDescription {
-  font-size: 1rem;
-  margin: 1rem;
-  overflow-y: scroll;
-  max-height: 150px;
+  font-size: 0.95rem;
+  margin: 0 0 10px;
+  overflow-y: auto;
+  max-height: 120px;
+  color: #ddd;
   scrollbar-width: none;
+  /* Hide scrollbar for Firefox */
   -ms-overflow-style: none;
-  padding: 0 1rem;
+  /* Hide scrollbar for IE/Edge */
+  padding: 0 10px;
+  user-select: none;
+  /* Prevent text selection */
 }
 
 .cardDescription::-webkit-scrollbar {
-  width: 0;
-  height: 0;
+  display: none;
 }
 
-.card {
-  transition: transform 0.3s, background-color 0.3s;
-  background-color: white;
-  user-select: none;
-  touch-action: pan-y;
-  width: 300px;
-  height: 400px;
-  background: white;
-  border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-
+.cardDescription::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 3px;
 }
 
+/* Swipe animations */
 .card.swipe-left {
   transform: rotate(-20deg) translateX(-100%);
-  background-color: red;
+  background-color: #b33939;
+  /* muted red */
 }
 
 .card.swipe-right {
   transform: rotate(20deg) translateX(100%);
-  background-color: green;
+  background-color: #38ada9;
+  /* muted teal/green */
+}
+
+
+/* Hamburger Menu */
+.hamburger {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  width: 30px;
+  height: 22px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+  z-index: 1001;
+  /* above cards */
+}
+
+.hamburger .bar {
+  height: 4px;
+  width: 100%;
+  background-color: white;
+  border-radius: 2px;
+}
+
+.hamburger.hidden {
+  display: none;
 }

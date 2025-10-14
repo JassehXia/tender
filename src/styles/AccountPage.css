@@ -1,0 +1,99 @@
+.accountPage {
+    background-color: #121212;
+    color: white;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 40px 20px;
+}
+
+.accountTopBar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 400px;
+    margin-bottom: 40px;
+}
+
+.menuIcon {
+    font-size: 2rem;
+    cursor: pointer;
+}
+
+.appTitle {
+    font-size: 1.8rem;
+    font-weight: bold;
+    touch-action: none;
+}
+
+.accountContainer {
+    background-color: #1e1e1e;
+    padding: 40px;
+    border-radius: 16px;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    text-align: center;
+}
+
+.accountContainer h2 {
+    margin-bottom: 10px;
+    font-size: 1.8rem;
+}
+
+.subtitle {
+    color: #ccc;
+    margin-bottom: 25px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+input {
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    background-color: #2a2a2a;
+    color: white;
+    font-size: 1rem;
+}
+
+input:focus {
+    outline: 2px solid #ff7b00;
+}
+
+.primaryBtn {
+    background-color: #ff7b00;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 12px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.primaryBtn:hover {
+    background-color: #ff9533;
+}
+
+.toggleText {
+    margin-top: 15px;
+    color: #ccc;
+}
+
+.toggleText span {
+    color: #ff7b00;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.toggleText span:hover {
+    text-decoration: underline;
+}

@@ -1,0 +1,158 @@
+.homePage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px;
+    color: white;
+    background-color: #121212;
+    min-height: 100vh;
+}
+
+/* Top bar with hamburger menu */
+.topBar {
+    display: flex;
+    align-items: center;
+    width: 90%;
+    margin-bottom: 30px;
+}
+
+/* Hamburger menu icon */
+.menuIcon {
+    font-size: 1.8rem;
+    cursor: pointer;
+    margin-right: 20px;
+    color: white;
+}
+
+.menuIcon:hover {
+    color: #ccc;
+    transform: scale(1.05);
+    transition: transform 0.2s ease-in-out;
+}
+
+
+.title {
+    font-size: 3rem;
+    margin-bottom: 40px;
+    touch-action: none;
+}
+
+.savedFoodsBox,
+.connectionsBox {
+    width: 90%;
+    margin-bottom: 40px;
+}
+
+.savedFoodsTitle,
+.connectionsTitle {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.savedFoodsScroll {
+    display: flex;
+    overflow-x: auto;
+    overflow-y: hidden;
+    /* prevents vertical scroll in the box */
+    gap: 20px;
+    padding: 15px;
+    scroll-behavior: smooth;
+}
+
+
+
+.savedFoodsScroll::-webkit-scrollbar {
+    height: 8px;
+}
+
+.savedFoodsScroll::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+}
+
+
+.recipeCard {
+    flex: 0 0 200px;
+    height: 220px;
+    background-color: #1e1e1e;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 10px;
+}
+
+.recipeCard:hover {
+    transform: scale(1.05);
+    transition: transform 0.2s ease-in-out;
+}
+
+.recipeCard img {
+    width: 100%;
+    height: 130px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.recipeName {
+    font-weight: bold;
+    margin-top: 8px;
+}
+
+.recipeCuisine {
+    font-size: 0.9rem;
+    color: #ccc;
+}
+
+.emptyMessage {
+    color: #bbb;
+    font-style: italic;
+}
+
+.connections {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+
+.connectionCard {
+    background-color: #1e1e1e;
+    padding: 15px;
+    border-radius: 12px;
+    text-align: center;
+}
+
+.connectionCard:hover {
+    transform: scale(1.05);
+    transition: transform 0.2s ease-in-out;
+}
+
+.connectionEmoji {
+    font-size: 1.8rem;
+}
+
+.viewMoreCard {
+    flex: 0 0 200px;
+    height: 220px;
+    background-color: #333;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: #fff;
+    font-weight: bold;
+    font-size: 1.2rem;
+    text-align: center;
+}
+
+.viewMoreCard:hover {
+    background-color: #444;
+}
+
+.viewMoreText {
+    padding: 10px;
+}

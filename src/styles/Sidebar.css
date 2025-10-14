@@ -1,0 +1,77 @@
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: -260px;
+    /* fully hide (a bit more than width) */
+    width: 250px;
+    height: 100%;
+    background-color: #1e1e1e;
+    color: white;
+    padding: 20px;
+    box-sizing: border-box;
+    transition: transform 0.3s ease-in-out;
+    z-index: 1001;
+    display: flex;
+    flex-direction: column;
+    transform: translateX(-100%);
+    /* ensures it's 100% hidden */
+}
+
+.sidebar.open {
+    transform: translateX(0);
+    /* slide in smoothly */
+    left: 0;
+}
+
+.sidebarContent {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.closeBtn {
+    align-self: flex-end;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    margin-bottom: 20px;
+    transition: color 0.3s;
+}
+
+.closeBtn:hover {
+    color: #ff7b00;
+}
+
+.sidebarMenu {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.sidebarMenu li {
+    cursor: pointer;
+    font-size: 1.2rem;
+    padding: 8px 12px;
+    border-radius: 8px;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.sidebarMenu li:hover {
+    background-color: #2a2a2a;
+    transform: translateX(5px);
+}
+
+/* Optional overlay (if you haven't added it yet) */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}

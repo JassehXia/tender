@@ -1,0 +1,126 @@
+.editProfilePage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px;
+    color: white;
+    background-color: #121212;
+    min-height: 100vh;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+}
+
+.editProfileContainer {
+    width: 90%;
+    max-width: 500px;
+    background-color: #1e1e1e;
+    border-radius: 12px;
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+.title {
+    font-size: 2.5rem;
+    color: #ff6b6b;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+label {
+    display: flex;
+    flex-direction: column;
+    font-weight: 600;
+    font-size: 1rem;
+    gap: 5px;
+}
+
+input,
+textarea {
+    padding: 10px;
+    border-radius: 12px;
+    border: none;
+    background-color: #2a2a2a;
+    color: white;
+    font-size: 1rem;
+    resize: none;
+}
+
+input::placeholder,
+textarea::placeholder {
+    color: #bbb;
+}
+
+input:focus,
+textarea:focus {
+    outline: 2px solid #ff6b6b;
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.cancelBtn {
+    background-color: #333;
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.2s ease-in-out;
+}
+
+.cancelBtn:hover {
+    background-color: #444;
+}
+
+.saveBtn {
+    background-color: #ff6b6b;
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.2s ease-in-out;
+}
+
+.saveBtn:hover {
+    background-color: #ff4b4b;
+}
+
+.loading {
+    color: #bbb;
+    font-size: 1.2rem;
+    margin-top: 50px;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .editProfileContainer {
+        width: 95%;
+        padding: 20px;
+    }
+
+    .title {
+        font-size: 2rem;
+    }
+}
+
+.profileAvatarContainer {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.profileAvatarPreview {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #ff6b6b;
+}

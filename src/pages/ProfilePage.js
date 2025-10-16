@@ -2,11 +2,13 @@ import React, { useEffect, useState, useContext } from "react";
 import Sidebar from "../components/Sidebar";
 import "../styles/ProfilePage.css";
 import { AuthContext } from "../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 export default function ProfilePage() {
     const [sidebarOpen, setSidebarOpen] = useState(false);
     const [user, setUser] = useState(null);
     const { isLoggedIn } = useContext(AuthContext);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchUser = async () => {
@@ -27,6 +29,11 @@ export default function ProfilePage() {
 
         fetchUser();
     }, []);
+
+    const handleNavigate = (path) => {
+        console.log(isLoggedIn);
+        navigate(path);
+    };
 
     if (!user) return <div className="loading">Loading profile...</div>;
 
@@ -111,7 +118,8 @@ export default function ProfilePage() {
                 </div>
 
 
-                <button className="editBtn">Edit Profile</button>
+                <button className="editBtn"
+                    onClick={() => handleNavigate("/edit-profile")}>Edit Profile</button>
             </div>
         </div>
     );

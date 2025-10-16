@@ -5,6 +5,7 @@ import AccountPage from "./pages/AccountPage";
 import SwipingPage from "./pages/SwipingPage"; // ✅ import it
 import Sidebar from "./components/Sidebar";
 import ProfilePage from "./pages/ProfilePage";
+import EditProfile from "./pages/EditProfilePage";
 import { AuthContext } from "./context/AuthContext"; // ✅ import contex
 
 function App() {
@@ -45,6 +46,15 @@ function App() {
             <ProfilePage
               isLoggedIn={isLoggedIn}
               setSidebarOpen={setSidebarOpen} />
+          }
+        />
+        <Route
+          path="/edit-profile"
+          element={
+            <EditProfile
+              isLoggedIn={isLoggedIn}
+              setSidebarOpen={setSidebarOpen}
+            />
           }
         />
 

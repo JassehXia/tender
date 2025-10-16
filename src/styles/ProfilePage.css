@@ -1,0 +1,257 @@
+.profilePage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #121212;
+    min-height: 100vh;
+    color: white;
+    padding: 30px;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+}
+
+/* Top bar */
+.profileTopBar {
+    display: flex;
+    align-items: center;
+    width: 90%;
+    margin-bottom: 30px;
+}
+
+.profileTopBar .menuIcon {
+    font-size: 1.8rem;
+    cursor: pointer;
+    margin-right: 20px;
+    color: white;
+}
+
+.profileTopBar .menuIcon:hover {
+    color: #ccc;
+    transform: scale(1.05);
+    transition: transform 0.2s ease-in-out;
+}
+
+.profileTopBar .appTitle {
+    font-size: 2rem;
+}
+
+/* Profile container */
+.profileContainer {
+    width: 90%;
+    max-width: 500px;
+    background-color: #1e1e1e;
+    border-radius: 12px;
+    padding: 25px;
+    text-align: center;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s ease-in-out;
+}
+
+.profileContainer:hover {
+    transform: translateY(-2px);
+}
+
+/* Avatar */
+.profileAvatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 15px;
+    border: 2px solid #ff6b6b;
+}
+
+/* User info */
+.profileContainer h2 {
+    font-size: 24px;
+    margin-bottom: 5px;
+}
+
+.profileEmail {
+    font-size: 14px;
+    color: #bbb;
+    margin-bottom: 20px;
+}
+
+/* Stats cards */
+.profileStats {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.statCard {
+    background-color: #2a2a2a;
+    padding: 15px;
+    border-radius: 10px;
+    flex: 1;
+}
+
+.statNumber {
+    font-size: 20px;
+    font-weight: bold;
+    color: #ff6b6b;
+}
+
+.statLabel {
+    font-size: 14px;
+    color: #ccc;
+}
+
+/* Edit Profile Button */
+.editBtn {
+    padding: 10px 20px;
+    background-color: #ff6b6b;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.2s;
+}
+
+.editBtn:hover {
+    background-color: #ff4b4b;
+}
+
+/* Loading state */
+.loading {
+    font-size: 18px;
+    color: #bbb;
+    margin-top: 50px;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .profileContainer {
+        width: 95%;
+        padding: 20px;
+    }
+
+    .profileAvatar {
+        width: 100px;
+        height: 100px;
+    }
+
+    .profileStats {
+        flex-direction: column;
+        gap: 15px;
+    }
+}
+
+.connectionCard {
+    flex: 0 0 120px;
+    background-color: #2a2a2a;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    text-align: center;
+    padding: 10px;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+}
+
+.connectionCard:hover {
+    transform: scale(1.05);
+}
+
+.connectionAvatar {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    margin-bottom: 8px;
+    border: 2px solid #ff6b6b;
+}
+
+.connectionName {
+    color: #fff;
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+
+.connectionsBox,
+.savedFoodsBox {
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+.connectionsTitle,
+.savedFoodsTitle {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    text-align: left;
+}
+
+.connectionsScroll,
+.savedFoodsScroll {
+    display: flex;
+    overflow-x: auto;
+    gap: 15px;
+    padding: 10px 0;
+    scroll-behavior: smooth;
+}
+
+.connectionsScroll::-webkit-scrollbar,
+.savedFoodsScroll::-webkit-scrollbar {
+    height: 6px;
+}
+
+.connectionsScroll::-webkit-scrollbar-thumb,
+.savedFoodsScroll::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+}
+
+.connectionCard,
+.recipeCard {
+    flex: 0 0 200px;
+    height: 220px;
+    background-color: #2a2a2a;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    text-align: center;
+    padding: 10px;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+}
+
+.recipeCard:hover {
+    transform: scale(1.05);
+}
+
+.recipeCardImg {
+    width: 100%;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.recipePlaceholder {
+    width: 100%;
+    height: 120px;
+    background-color: #444;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    color: #ccc;
+    margin-bottom: 10px;
+}
+
+.recipeName {
+    font-weight: bold;
+    color: #fff;
+    margin-bottom: 4px;
+}
+
+.recipeCuisine {
+    font-size: 0.85rem;
+    color: #bbb;
+}

@@ -1,40 +1,63 @@
-import React, { useState } from "react";
-import "../styles/AccountPage.css";
+import React, { useState, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import Sidebar from "../components/Sidebar";
+import { AuthContext } from "../context/AuthContext";
+import "../styles/AccountPage.css";
 
 const AccountPage = () => {
+    const navigate = useNavigate();
     const [sidebarOpen, setSidebarOpen] = useState(false);
     const [isSignup, setIsSignup] = useState(false);
     const [formData, setFormData] = useState({
-        name: "",
+        username: "",
         email: "",
         password: "",
     });
 
-    const handleChange = (e) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value });
-    };
+    const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
 
-    const handleSubmit = (e) => {
+    // Handle form input changes
+    const handleChange = (e) =>
+        setFormData({ ...formData, [e.target.name]: e.target.value });
+
+    // Handle login/signup form submission
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        if (isSignup) {
-            console.log("Creating account:", formData);
-            // signup logic here
-        } else {
-            console.log("Logging in:", formData);
-            // login logic here
+        const endpoint = isSignup ? "/auth/signup" : "/auth/login";
+
+        try {
+            const res = await fetch(`http://localhost:5000${endpoint}`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(formData),
+            });
+
+            const data = await res.json();
+
+            if (res.ok) {
+                localStorage.setItem("token", data.token);
+                localStorage.setItem("user", JSON.stringify(data.user)); // ✅ save user
+                setIsLoggedIn(true);
+                console.log("Success:", data.user);
+                navigate("/"); // Redirect to home page
+            } else {
+                alert(data.error);
+            }
+        } catch (err) {
+            console.error("Error:", err);
         }
     };
 
     return (
         <div className="accountPage">
+            {/* Sidebar */}
             <Sidebar
                 isOpen={sidebarOpen}
                 onClose={() => setSidebarOpen(false)}
-                isLoggedIn={false}
+                isLoggedIn={isLoggedIn}
             />
 
-            {/* Top bar */}
+            {/* Top Bar */}
             <div className="accountTopBar">
                 <div className="menuIcon" onClick={() => setSidebarOpen(true)}>
                     ☰
@@ -42,7 +65,7 @@ const AccountPage = () => {
                 <h1 className="appTitle">Tender</h1>
             </div>
 
-            {/* Form container */}
+            {/* Form Container */}
             <div className="accountContainer">
                 <h2>{isSignup ? "Create Account" : "Welcome Back"}</h2>
                 <p className="subtitle">
@@ -51,13 +74,13 @@ const AccountPage = () => {
                         : "Log in to access your saved dishes."}
                 </p>
 
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmit} className="accountForm">
                     {isSignup && (
                         <input
                             type="text"
-                            name="name"
-                            placeholder="Full Name"
-                            value={formData.name}
+                            name="username"
+                            placeholder="Username"
+                            value={formData.username}
                             onChange={handleChange}
                             required
                         />
@@ -78,6 +101,7 @@ const AccountPage = () => {
                         onChange={handleChange}
                         required
                     />
+
                     <button type="submit" className="primaryBtn">
                         {isSignup ? "Sign Up" : "Log In"}
                     </button>

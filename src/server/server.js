@@ -2,15 +2,19 @@ const express = require('express');
 const mongoose = require('mongoose');
 const axios = require('axios');
 const cors = require('cors');
+const authRoutes = require('./routes/auth');
 const connectDB = require('./config/db');
 const Food = require('./models/Food');
 require('dotenv').config();
+
+
 
 const app = express();
 const PORT = process.env.PORT || 5000;
 
 app.use(cors());
 app.use(express.json());
+app.use('/auth', authRoutes);
 connectDB();
 
 app.listen(PORT, () => {
@@ -117,3 +121,7 @@ app.get("/getRandomFood", async (req, res) => {
     res.status(500).json({ error: "Failed to fetch random food" });
   }
 });
+
+
+
+

@@ -1,12 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import AccountPage from "./pages/AccountPage";
 import SwipingPage from "./pages/SwipingPage"; // ✅ import it
 import Sidebar from "./components/Sidebar";
+import ProfilePage from "./pages/ProfilePage";
+import { AuthContext } from "./context/AuthContext"; // ✅ import contex
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const { isLoggedIn } = useContext(AuthContext); // ✅ get global login state
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
@@ -32,11 +34,20 @@ function App() {
           element={
             <AccountPage
               isLoggedIn={isLoggedIn}
-              setIsLoggedIn={setIsLoggedIn}
               setSidebarOpen={setSidebarOpen}
             />
           }
         />
+
+        <Route
+          path="/profile"
+          element={
+            <ProfilePage
+              isLoggedIn={isLoggedIn}
+              setSidebarOpen={setSidebarOpen} />
+          }
+        />
+
         <Route
           path="/explore"
           element={

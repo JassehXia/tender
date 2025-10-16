@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSwipeable } from "react-swipeable";
-import "../styles/MainPage.css";
+import "../styles/SwipingPage.css";
 
 export default function Card() {
   const [currentFood, setCurrentFood] = useState(null);
@@ -8,32 +8,29 @@ export default function Card() {
   const [foodImage, setFoodImage] = useState(null);
   const [swipeDir, setSwipeDir] = useState(null);
 
-  // Fetch a random food from backend
   const fetchRandomFood = async () => {
     try {
       const response = await fetch("http://localhost:5000/getRandomFood");
       const data = await response.json();
-      setCurrentFood(data.name); // adjust key based on DB schema
+      setCurrentFood(data.name);
       setFoodDescription(data.description);
       setFoodImage(data.image);
     } catch (err) {
-      console.error("Failed to fetch random food:", err);
+      console.error("Failed to fetch food:", err);
       setCurrentFood("Error fetching food");
     }
   };
 
   useEffect(() => {
-    fetchRandomFood(); // Load first food when component mounts
+    fetchRandomFood();
   }, []);
 
   const handleSwipe = (dir) => {
     setSwipeDir(dir);
-
-    // after animation ends, load a new food
     setTimeout(() => {
       fetchRandomFood();
       setSwipeDir(null);
-    }, 400); // match CSS transition
+    }, 300);
   };
 
   const handlers = useSwipeable({
@@ -51,10 +48,12 @@ export default function Card() {
       className={`card ${swipeDir === "left" ? "swipe-left" : ""} ${swipeDir === "right" ? "swipe-right" : ""
         }`}
     >
+      {foodImage && <img src={foodImage} alt={currentFood} className="cardImage" />}
       <h2 className="cardTitle">{currentFood}</h2>
-      <img className="cardImage" src={foodImage} alt={currentFood} />
-      <p className="cardDescription">{foodDescription}</p>
-
+      <p className="cardDescription">
+        {foodDescription.split(" ").slice(0, 20).join(" ")}
+        {foodDescription.split(" ").length > 20 ? "..." : ""}
+      </p>
     </div>
   );
 }

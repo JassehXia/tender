@@ -1,12 +1,19 @@
 import React, { useEffect, useState, useContext } from "react";
 import Sidebar from "../components/Sidebar";
 import "../styles/ProfilePage.css";
+import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 
 export default function ProfilePage() {
     const [sidebarOpen, setSidebarOpen] = useState(false);
     const [user, setUser] = useState(null);
     const { isLoggedIn } = useContext(AuthContext);
+    const navigate = useNavigate();
+
+    const handleNavigate = (path) => {
+        navigate(path);
+        setSidebarOpen(false);
+    };
 
     useEffect(() => {
         const fetchUser = async () => {
@@ -14,14 +21,17 @@ export default function ProfilePage() {
             if (!token) return;
 
             try {
-                const res = await fetch("http://localhost:5000/auth/me", {
+                const res = await fetch("http://localhost:5000/user/profile", {
                     headers: { Authorization: `Bearer ${token}` },
                 });
                 const data = await res.json();
-                if (res.ok) setUser(data.user);
-                else console.error(data.error);
+                if (res.ok || res.status === 200) {
+                    setUser(data);
+                } else {
+                    console.error(data.error);
+                }
             } catch (err) {
-                console.error(err);
+                console.error("Error fetching user:", err);
             }
         };
 
@@ -38,15 +48,18 @@ export default function ProfilePage() {
                 isLoggedIn={isLoggedIn}
             />
 
+            {/* Top Bar */}
             <div className="profileTopBar">
                 <div className="menuIcon" onClick={() => setSidebarOpen(true)}>☰</div>
-                <h1 className="appTitle">Your Profile</h1>
+                <h1 className="appTitle">Tender</h1>
             </div>
 
+
+            {/* Profile Info */}
             <div className="profileContainer">
                 <img
-                    src={`https://ui-avatars.com/api/?name=${user.username}&background=ff6b6b&color=fff&size=128`}
-                    alt="Profile Avatar"
+                    src={user.image ? `http://localhost:5000${user.image}` : `/default-profile.png`}
+                    alt="Profile"
                     className="profileAvatar"
                 />
                 <h2>{user.username}</h2>
@@ -68,9 +81,7 @@ export default function ProfilePage() {
                 <div className="connectionsBox">
                     <h3 className="connectionsTitle">Friends</h3>
                     <div className="connectionsScroll">
-                        {user.friends.length === 0 && (
-                            <p className="emptyMessage">No friends yet</p>
-                        )}
+                        {user.friends.length === 0 && <p className="emptyMessage">No friends yet</p>}
                         {user.friends.map((friend, i) => (
                             <div key={i} className="connectionCard">
                                 <img
@@ -84,19 +95,16 @@ export default function ProfilePage() {
                     </div>
                 </div>
 
-
                 {/* Liked Recipes Scroll */}
                 <div className="savedFoodsBox">
                     <h3 className="savedFoodsTitle">Liked Recipes</h3>
                     <div className="savedFoodsScroll">
-                        {user.liked.length === 0 && (
-                            <p className="emptyMessage">No liked recipes yet</p>
-                        )}
+                        {user.liked.length === 0 && <p className="emptyMessage">No liked recipes yet</p>}
                         {user.liked.map((recipe, i) => (
                             <div key={i} className="recipeCard">
                                 {recipe.image ? (
                                     <img
-                                        src={recipe.image}
+                                        src={recipe.image.startsWith("/uploads") ? `http://localhost:5000${recipe.image}` : recipe.image}
                                         alt={recipe.name}
                                         className="recipeCardImg"
                                     />
@@ -110,8 +118,12 @@ export default function ProfilePage() {
                     </div>
                 </div>
 
-
-                <button className="editBtn">Edit Profile</button>
+                <button
+                    className="editBtn"
+                    onClick={() => handleNavigate("/edit-profile")}
+                >
+                    Edit Profile
+                </button>
             </div>
         </div>
     );

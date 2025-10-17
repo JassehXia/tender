@@ -7,28 +7,39 @@
     align-items: center;
     justify-content: flex-start;
     padding: 40px 20px;
+    font-family: 'Arial', sans-serif;
 }
 
+/* Top Bar */
 .accountTopBar {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
+    /* Center the app title */
     width: 100%;
     max-width: 400px;
     margin-bottom: 40px;
+    position: relative;
 }
 
 .menuIcon {
     font-size: 2rem;
     cursor: pointer;
+    position: absolute;
+    left: 0;
 }
 
 .appTitle {
-    font-size: 1.8rem;
+    font-size: 2rem;
+    /* Make it a bit bigger */
     font-weight: bold;
-    touch-action: none;
+    color: #ffffff;
+    /* Accent color */
+    text-align: center;
+    margin: 0;
 }
 
+/* Main container */
 .accountContainer {
     background-color: #1e1e1e;
     padding: 40px;
@@ -41,14 +52,19 @@
 
 .accountContainer h2 {
     margin-bottom: 10px;
-    font-size: 1.8rem;
+    font-size: 2rem;
+    /* bigger header for "Welcome Back" */
+    font-weight: 600;
+    color: white;
 }
 
 .subtitle {
     color: #ccc;
     margin-bottom: 25px;
+    font-size: 0.95rem;
 }
 
+/* Form styling */
 form {
     display: flex;
     flex-direction: column;
@@ -86,6 +102,7 @@ input:focus {
 .toggleText {
     margin-top: 15px;
     color: #ccc;
+    font-size: 0.9rem;
 }
 
 .toggleText span {
@@ -96,4 +113,97 @@ input:focus {
 
 .toggleText span:hover {
     text-decoration: underline;
+}
+
+/* Placeholder styles */
+.accountPlaceholder {
+    background-color: #121212;
+    color: white;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 50px;
+}
+
+.placeholderTopBar {
+    width: 90%;
+    height: 50px;
+    background-color: #1e1e1e;
+    border-radius: 8px;
+    margin-bottom: 40px;
+    animation: pulse 1.5s infinite ease-in-out;
+}
+
+.placeholderForm {
+    width: 90%;
+    max-width: 400px;
+    background-color: #1e1e1e;
+    border-radius: 16px;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.placeholderLine {
+    height: 20px;
+    background-color: #2b2b2b;
+    border-radius: 8px;
+    animation: pulse 1.5s infinite ease-in-out;
+}
+
+.placeholderLine.title {
+    width: 60%;
+    height: 24px;
+}
+
+.placeholderLine.input {
+    width: 100%;
+    height: 40px;
+}
+
+.placeholderLine.button {
+    width: 50%;
+    height: 45px;
+    margin-top: 10px;
+}
+
+@keyframes pulse {
+    0% {
+        background-color: #2b2b2b;
+    }
+
+    50% {
+        background-color: #3a3a3a;
+    }
+
+    100% {
+        background-color: #2b2b2b;
+    }
+}
+
+.skeletonForm {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.skeletonBox {
+    height: 40px;
+    border-radius: 6px;
+    background: linear-gradient(90deg, #eee 25%, #ddd 50%, #eee 75%);
+    background-size: 400% 100%;
+    animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: 100% 0;
+    }
+
+    100% {
+        background-position: -100% 0;
+    }
 }

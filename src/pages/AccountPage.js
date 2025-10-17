@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Sidebar from "../components/Sidebar";
 import { AuthContext } from "../context/AuthContext";
@@ -8,6 +8,13 @@ const AccountPage = () => {
     const navigate = useNavigate();
     const [sidebarOpen, setSidebarOpen] = useState(false);
     const [isSignup, setIsSignup] = useState(false);
+    const [loading, setLoading] = useState(true);
+
+    const [user, setUser] = useState({
+        username: "John Doe",
+        email: "john@example.com",
+    });
+
     const [formData, setFormData] = useState({
         username: "",
         email: "",
@@ -16,11 +23,21 @@ const AccountPage = () => {
 
     const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
 
-    // Handle form input changes
+    useEffect(() => {
+        const fetchUser = async () => {
+            const savedUser = localStorage.getItem("user");
+            if (savedUser) {
+                const parsedUser = JSON.parse(savedUser);
+                setUser(parsedUser);
+            }
+            setTimeout(() => setLoading(false), 400);
+        };
+        fetchUser();
+    }, []);
+
     const handleChange = (e) =>
         setFormData({ ...formData, [e.target.name]: e.target.value });
 
-    // Handle login/signup form submission
     const handleSubmit = async (e) => {
         e.preventDefault();
         const endpoint = isSignup ? "/auth/signup" : "/auth/login";
@@ -36,10 +53,10 @@ const AccountPage = () => {
 
             if (res.ok) {
                 localStorage.setItem("token", data.token);
-                localStorage.setItem("user", JSON.stringify(data.user)); // ✅ save user
+                localStorage.setItem("user", JSON.stringify(data.user));
                 setIsLoggedIn(true);
-                console.log("Success:", data.user);
-                navigate("/"); // Redirect to home page
+                setUser(data.user);
+                navigate("/");
             } else {
                 alert(data.error);
             }
@@ -48,16 +65,34 @@ const AccountPage = () => {
         }
     };
 
+    if (loading) {
+        return (
+            <div className="accountPage placeholder">
+                <Sidebar isOpen={false} onClose={() => { }} isLoggedIn={false} />
+                <div className="accountTopBar">
+                    <h1 className="appTitle">Tender</h1>
+                </div>
+                <div className="accountContainer">
+                    <h2 className="placeholder">Welcome Back</h2>
+                    <p className="subtitle">Loading your account...</p>
+                    <div className="skeletonForm">
+                        <div className="skeletonBox"></div>
+                        <div className="skeletonBox"></div>
+                        <div className="skeletonBox"></div>
+                    </div>
+                </div>
+            </div>
+        );
+    }
+
     return (
         <div className="accountPage">
-            {/* Sidebar */}
             <Sidebar
                 isOpen={sidebarOpen}
                 onClose={() => setSidebarOpen(false)}
                 isLoggedIn={isLoggedIn}
             />
 
-            {/* Top Bar */}
             <div className="accountTopBar">
                 <div className="menuIcon" onClick={() => setSidebarOpen(true)}>
                     ☰
@@ -65,13 +100,12 @@ const AccountPage = () => {
                 <h1 className="appTitle">Tender</h1>
             </div>
 
-            {/* Form Container */}
             <div className="accountContainer">
                 <h2>{isSignup ? "Create Account" : "Welcome Back"}</h2>
                 <p className="subtitle">
                     {isSignup
                         ? "Sign up to start exploring new recipes!"
-                        : "Log in to access your saved dishes."}
+                        : `Logged in as ${user.email}`}
                 </p>
 
                 <form onSubmit={handleSubmit} className="accountForm">

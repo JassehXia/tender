@@ -1,3 +1,41 @@
+/* Top bar */
+.swipeTopBar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  /* hamburger left, title next */
+  width: 100%;
+  padding: 1rem 1.5rem;
+  background-color: #121212;
+  border-bottom: 1px solid #222;
+  box-sizing: border-box;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.swipeTopBar .menuIcon {
+  font-size: 1.5rem;
+  cursor: pointer;
+  margin-right: 1rem;
+  /* spacing between hamburger & title */
+  color: #fff;
+  transition: transform 0.2s;
+}
+
+.swipeTopBar .menuIcon:hover {
+  transform: scale(1.1);
+}
+
+.swipeTopBar .appTitle {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #fff;
+  margin-left: .4rem;
+  /* spacing between title & hamburger */
+}
+
+
 .swipingPage {
   display: flex;
   flex-direction: column;

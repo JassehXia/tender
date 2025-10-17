@@ -5,6 +5,7 @@ import AccountPage from "./pages/AccountPage";
 import SwipingPage from "./pages/SwipingPage"; // ✅ import it
 import Sidebar from "./components/Sidebar";
 import ProfilePage from "./pages/ProfilePage";
+import EditProfilePage from "./pages/EditProfilePage";
 import { AuthContext } from "./context/AuthContext"; // ✅ import contex
 
 function App() {
@@ -12,54 +13,62 @@ function App() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
-    <Router>
-      <Sidebar
-        isOpen={sidebarOpen}
-        onClose={() => setSidebarOpen(false)}
-        isLoggedIn={isLoggedIn}
-      />
-
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <HomePage
-              isLoggedIn={isLoggedIn}
-              setSidebarOpen={setSidebarOpen}
-            />
-          }
-        />
-        <Route
-          path="/account"
-          element={
-            <AccountPage
-              isLoggedIn={isLoggedIn}
-              setSidebarOpen={setSidebarOpen}
-            />
-          }
+    <div classname="accountPage fadeIn">
+      <Router>
+        <Sidebar
+          isOpen={sidebarOpen}
+          onClose={() => setSidebarOpen(false)}
+          isLoggedIn={isLoggedIn}
         />
 
-        <Route
-          path="/profile"
-          element={
-            <ProfilePage
-              isLoggedIn={isLoggedIn}
-              setSidebarOpen={setSidebarOpen} />
-          }
-        />
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <HomePage
+                isLoggedIn={isLoggedIn}
+                setSidebarOpen={setSidebarOpen}
+              />
+            }
+          />
+          <Route
+            path="/account"
+            element={
+              <AccountPage
+                isLoggedIn={isLoggedIn}
+                setSidebarOpen={setSidebarOpen}
+              />
+            }
+          />
 
-        <Route
-          path="/explore"
-          element={
-            <SwipingPage
-              isLoggedIn={isLoggedIn}
-              sidebarOpen={sidebarOpen}
-              setSidebarOpen={setSidebarOpen}
-            />
-          }
-        />
-      </Routes>
-    </Router>
+          <Route
+            path="/profile"
+            element={
+              <ProfilePage
+                isLoggedIn={isLoggedIn}
+                setSidebarOpen={setSidebarOpen} />
+            }
+          />
+          <Route
+            path="edit-profile" element={
+              <EditProfilePage
+                isLoggedIn={isLoggedIn}
+                setSidebarOpen={setSidebarOpen} />}
+          />
+
+          <Route
+            path="/explore"
+            element={
+              <SwipingPage
+                isLoggedIn={isLoggedIn}
+                sidebarOpen={sidebarOpen}
+                setSidebarOpen={setSidebarOpen}
+              />
+            }
+          />
+        </Routes>
+      </Router>
+    </div>
   );
 }
 

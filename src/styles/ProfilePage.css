@@ -13,26 +13,40 @@
 .profileTopBar {
     display: flex;
     align-items: center;
-    width: 90%;
-    margin-bottom: 30px;
+    justify-content: space-between;
+    /* spreads hamburger & title */
+    padding: 1rem;
+    /* some padding inside */
+    width: 100%;
+    /* full viewport width */
+    box-sizing: border-box;
+    /* include padding in width */
+    border-bottom: 1px solid #121212;
+    background-color: #121212;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 }
 
 .profileTopBar .menuIcon {
-    font-size: 1.8rem;
+    font-size: 1.5rem;
     cursor: pointer;
-    margin-right: 20px;
-    color: white;
+    transition: transform 0.2s;
+    color: #fff;
 }
 
 .profileTopBar .menuIcon:hover {
-    color: #ccc;
-    transform: scale(1.05);
-    transition: transform 0.2s ease-in-out;
+    transform: scale(1.1);
 }
 
 .profileTopBar .appTitle {
-    font-size: 2rem;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #fff;
+    margin-left: 1rem;
 }
+
+
 
 /* Profile container */
 .profileContainer {

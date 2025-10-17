@@ -8,20 +8,54 @@
     min-height: 100vh;
 }
 
-/* Top bar with hamburger menu */
-.topBar {
+/* Top bar */
+.homeTopBar {
     display: flex;
     align-items: center;
-    width: 90%;
-    margin-bottom: 30px;
+    justify-content: flex-start;
+    /* hamburger on left, title next */
+    width: 100%;
+    padding: 1rem 1.5rem;
+    background-color: #121212;
+    border-bottom: 1px solid #222;
+    box-sizing: border-box;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 }
+
+.homeTopBar .menuIcon {
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: transform 0.2s;
+    margin-right: 1rem;
+    /* spacing between hamburger & title */
+    color: #fff;
+}
+
+.homeTopBar .menuIcon:hover {
+    transform: scale(1.1);
+}
+
+.homeTopBar .appTitle {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #fff;
+    margin-left: .7rem;
+}
+
 
 /* Hamburger menu icon */
 .menuIcon {
     font-size: 1.8rem;
     cursor: pointer;
-    margin-right: 20px;
     color: white;
+    position: absolute;
+    /* keep it on the left without affecting title centering */
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .menuIcon:hover {
@@ -30,13 +64,20 @@
     transition: transform 0.2s ease-in-out;
 }
 
-
+/* Title centered */
 .title {
-    font-size: 3rem;
-    margin-bottom: 40px;
-    touch-action: none;
+    font-size: 2.2rem;
+    font-weight: bold;
+    text-align: center;
+    color: white;
+    margin: 0;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
+/* Saved recipes and connections */
 .savedFoodsBox,
 .connectionsBox {
     width: 90%;
@@ -53,13 +94,10 @@
     display: flex;
     overflow-x: auto;
     overflow-y: hidden;
-    /* prevents vertical scroll in the box */
     gap: 20px;
     padding: 15px;
     scroll-behavior: smooth;
 }
-
-
 
 .savedFoodsScroll::-webkit-scrollbar {
     height: 8px;
@@ -70,7 +108,7 @@
     border-radius: 10px;
 }
 
-
+/* Recipe card */
 .recipeCard {
     flex: 0 0 200px;
     height: 220px;
@@ -82,11 +120,11 @@
     justify-content: center;
     text-align: center;
     padding: 10px;
+    transition: transform 0.2s ease-in-out;
 }
 
 .recipeCard:hover {
     transform: scale(1.05);
-    transition: transform 0.2s ease-in-out;
 }
 
 .recipeCard img {
@@ -111,29 +149,37 @@
     font-style: italic;
 }
 
+/* Connections */
 .connections {
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
 
-
 .connectionCard {
     background-color: #1e1e1e;
     padding: 15px;
     border-radius: 12px;
     text-align: center;
+    transition: transform 0.2s ease-in-out;
 }
 
 .connectionCard:hover {
     transform: scale(1.05);
-    transition: transform 0.2s ease-in-out;
 }
 
-.connectionEmoji {
-    font-size: 1.8rem;
+.connectionAvatar {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    margin-bottom: 5px;
 }
 
+.connectionName {
+    font-size: 0.95rem;
+}
+
+/* View more card */
 .viewMoreCard {
     flex: 0 0 200px;
     height: 220px;
@@ -151,8 +197,4 @@
 
 .viewMoreCard:hover {
     background-color: #444;
-}
-
-.viewMoreText {
-    padding: 10px;
 }

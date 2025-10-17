@@ -32,13 +32,14 @@ const HomePage = ({ isLoggedIn, setSidebarOpen }) => {
     return (
         <div className="homePage">
             {/* Top bar */}
-            <div className="topBar">
-                <FaBars
-                    className="menuIcon"
-                    onClick={() => setSidebarOpen(true)}
-                />
-                <h1 className="title">Tender</h1>
+            {/* Top bar */}
+            <div className="homeTopBar">
+                <div className="menuIcon" onClick={() => setSidebarOpen(true)}>
+                    ☰
+                </div>
+                <h1 className="appTitle">Tender</h1>
             </div>
+
 
             {/* Saved Recipes */}
             <div className="savedFoodsBox">

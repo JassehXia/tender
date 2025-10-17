@@ -32,7 +32,33 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
+  }
+}
+
+/* index.css or App.css (global stylesheet) */
+html,
+body,
+#root {
+  background-color: #000000;
+  /* match your app's bg */
+  color: #222;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  transition: background-color 0.2s ease;
+}
+
+/* index.css or AccountPage.css */
+.fadeIn {
+  opacity: 0;
+  animation: fadeIn 0.4s ease forwards;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
   }
 }

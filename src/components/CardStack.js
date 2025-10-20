@@ -24,18 +24,49 @@ export default function CardStack() {
         }
     };
 
+    // Save recipe to user account when swiping right
+    const saveRecipe = async (foodId) => {
+        const token = localStorage.getItem("token");
+        if (!token) return console.warn("No token found — user not logged in");
+
+        try {
+            const res = await fetch(`http://localhost:5000/user/saveRecipe/${foodId}`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`,
+                },
+            });
+
+            const data = await res.json();
+            if (!res.ok) throw new Error(data.error || data.message);
+            console.log("✅ Recipe saved:", data.message);
+        } catch (err) {
+            console.error("❌ Error saving recipe:", err.message);
+        }
+    };
+
+
     useEffect(() => {
         fetchCards();
     }, []);
 
-    const handleSwipe = (dir) => {
+    const handleSwipe = (dir, foodId) => {
+        if (dir === "right") {
+            saveRecipe(foodId);
+        }
+
         setCards(prev => prev.slice(1));
-        // fetch new card
+
+        // Fetch new card
         fetch("http://localhost:5000/getRandomFood")
             .then(res => res.json())
-            .then(data => setCards(prev => [...prev, data]));
+            .then(data => setCards(prev => [...prev, data]))
+            .catch(err => console.error(err));
+
         setDragX(0);
     };
+
 
     if (!cards.length) return <div className="card loading">Loading...</div>;
 
@@ -45,7 +76,7 @@ export default function CardStack() {
                 <DraggableCard
                     key={index}
                     data={card}
-                    onSwipe={handleSwipe}
+                    onSwipe={(dir) => handleSwipe(dir, card._id)} // 👈 pass ID
                     position={index}
                     isTop={index === 0}
                     dragX={dragX}
@@ -53,6 +84,7 @@ export default function CardStack() {
                     onClick={() => setSelectedCard(card)}
                     MAX_DRAG={MAX_DRAG}
                 />
+
             ))}
 
 

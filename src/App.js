@@ -6,6 +6,7 @@ import SwipingPage from "./pages/SwipingPage"; // ✅ import it
 import Sidebar from "./components/Sidebar";
 import ProfilePage from "./pages/ProfilePage";
 import EditProfilePage from "./pages/EditProfilePage";
+import SavedFoodsPage from "./pages/SavedFoodsPage";
 import { AuthContext } from "./context/AuthContext"; // ✅ import contex
 
 function App() {
@@ -60,6 +61,16 @@ function App() {
             path="/explore"
             element={
               <SwipingPage
+                isLoggedIn={isLoggedIn}
+                sidebarOpen={sidebarOpen}
+                setSidebarOpen={setSidebarOpen}
+              />
+            }
+          />
+          <Route
+            path="/saved-foods"
+            element={
+              <SavedFoodsPage
                 isLoggedIn={isLoggedIn}
                 sidebarOpen={sidebarOpen}
                 setSidebarOpen={setSidebarOpen}

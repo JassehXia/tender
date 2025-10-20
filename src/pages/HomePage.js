@@ -13,14 +13,23 @@ const HomePage = ({ isLoggedIn, setSidebarOpen }) => {
     const scrollRef = useRef(null);
 
     useEffect(() => {
-        fetch("http://localhost:5000/getFoodFromDB")
+        const token = localStorage.getItem("token");
+        if (!token) return;
+
+        fetch("http://localhost:5000/user/savedRecipes", {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        })
             .then((res) => res.json())
             .then((data) => {
+                // Get 4 random saved recipes
                 const shuffled = data.sort(() => 0.5 - Math.random());
                 setSavedRecipes(shuffled.slice(0, 4));
             })
-            .catch((err) => console.error("Error fetching recipes:", err));
+            .catch((err) => console.error("Error fetching saved recipes:", err));
     }, []);
+
 
     const handleWheel = (e) => {
         if (scrollRef.current) {
@@ -49,12 +58,17 @@ const HomePage = ({ isLoggedIn, setSidebarOpen }) => {
                     ref={scrollRef}
                     onWheel={handleWheel}
                 >
-                    {savedRecipes.map((recipe) => (
-                        <div key={recipe._id} className="recipeCard">
-                            <img src={recipe.image} alt={recipe.name} />
-                            <p className="recipeName">{recipe.name}</p>
-                        </div>
-                    ))}
+                    {savedRecipes.length === 0 ? (
+                        <p className="noSavedText"></p>
+                    ) : (
+                        savedRecipes.map((recipe) => (
+                            <div key={recipe._id} className="recipeCard">
+                                <img src={recipe.image} alt={recipe.name} />
+                                <p className="recipeName">{recipe.name}</p>
+                            </div>
+                        ))
+                    )}
+
 
                     <div className="recipeCard viewMoreCard">
                         <p className="viewMoreText">View More</p>

@@ -1,3 +1,4 @@
+// models/Users.js
 const mongoose = require('mongoose');
 
 const userSchema = new mongoose.Schema({
@@ -8,8 +9,17 @@ const userSchema = new mongoose.Schema({
     friendRequests: { type: [String], default: [] },
     bio: { type: String, default: '' },
     image: { type: String, default: '' },
-    liked: { type: [String], default: [] },
-    cuisinesLiked: { type: [String], default: [] }
+    cuisinesLiked: { type: [String], default: [] },
+
+    // 👇 New field for saved recipes
+    savedRecipes: { type: [mongoose.Schema.Types.ObjectId], ref: 'Food', default: [] },
+    cuisineLikes: {
+        type: Map,
+        of: Number,
+        default: {},
+    }
+
+
 });
 
 module.exports = mongoose.model('User', userSchema);

@@ -68,55 +68,59 @@ export default function ProfilePage() {
                 {/* Stats */}
                 <div className="profileStats">
                     <div className="statCard">
-                        <p className="statNumber">{user.friends.length}</p>
+                        <p className="statNumber">{user.friends?.length || 0}</p>
                         <p className="statLabel">Friends</p>
                     </div>
                     <div className="statCard">
-                        <p className="statNumber">{user.liked.length}</p>
+                        <p className="statNumber">{user.liked?.length || 0}</p>
                         <p className="statLabel">Liked Recipes</p>
                     </div>
                 </div>
 
+
                 {/* Friends Scroll */}
-                <div className="connectionsBox">
-                    <h3 className="connectionsTitle">Friends</h3>
-                    <div className="connectionsScroll">
-                        {user.friends.length === 0 && <p className="emptyMessage">No friends yet</p>}
-                        {user.friends.map((friend, i) => (
-                            <div key={i} className="connectionCard">
-                                <img
-                                    src={`https://ui-avatars.com/api/?name=${friend}&background=ff6b6b&color=fff&size=64`}
-                                    alt={friend}
-                                    className="connectionAvatar"
-                                />
-                                <p className="connectionName">{friend}</p>
-                            </div>
-                        ))}
-                    </div>
+                <div className="connectionsScroll">
+                    {(!user.friends || user.friends.length === 0) && (
+                        <p className="emptyMessage">No friends yet</p>
+                    )}
+                    {user.friends?.map((friend, i) => (
+                        <div key={i} className="connectionCard">
+                            <img
+                                src={`https://ui-avatars.com/api/?name=${friend}&background=ff6b6b&color=fff&size=64`}
+                                alt={friend}
+                                className="connectionAvatar"
+                            />
+                            <p className="connectionName">{friend}</p>
+                        </div>
+                    ))}
                 </div>
 
+
                 {/* Liked Recipes Scroll */}
-                <div className="savedFoodsBox">
-                    <h3 className="savedFoodsTitle">Liked Recipes</h3>
-                    <div className="savedFoodsScroll">
-                        {user.liked.length === 0 && <p className="emptyMessage">No liked recipes yet</p>}
-                        {user.liked.map((recipe, i) => (
-                            <div key={i} className="recipeCard">
-                                {recipe.image ? (
-                                    <img
-                                        src={recipe.image.startsWith("/uploads") ? `http://localhost:5000${recipe.image}` : recipe.image}
-                                        alt={recipe.name}
-                                        className="recipeCardImg"
-                                    />
-                                ) : (
-                                    <div className="recipePlaceholder">{recipe.name}</div>
-                                )}
-                                <p className="recipeName">{recipe.name}</p>
-                                <p className="recipeCuisine">{recipe.cuisine}</p>
-                            </div>
-                        ))}
-                    </div>
+                <div className="savedFoodsScroll">
+                    {(!user.liked || user.liked.length === 0) && (
+                        <p className="emptyMessage">No liked recipes yet</p>
+                    )}
+                    {user.liked?.map((recipe, i) => (
+                        <div key={i} className="recipeCard">
+                            {recipe.image ? (
+                                <img
+                                    src={recipe.image.startsWith("/uploads")
+                                        ? `http://localhost:5000${recipe.image}`
+                                        : recipe.image
+                                    }
+                                    alt={recipe.name}
+                                    className="recipeCardImg"
+                                />
+                            ) : (
+                                <div className="recipePlaceholder">{recipe.name}</div>
+                            )}
+                            <p className="recipeName">{recipe.name}</p>
+                            <p className="recipeCuisine">{recipe.cuisine}</p>
+                        </div>
+                    ))}
                 </div>
+
 
                 <button
                     className="editBtn"

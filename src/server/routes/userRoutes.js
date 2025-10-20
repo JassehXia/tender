@@ -4,6 +4,7 @@ const multer = require("multer");
 const path = require("path");
 const fs = require("fs");
 const User = require("../models/Users");
+const Food = require("../models/Food"); // 👈 make sure this is imported
 const jwt = require("jsonwebtoken");
 
 // ------------------- Multer Setup ------------------- //
@@ -64,5 +65,91 @@ router.put("/update", verifyToken, upload.single("image"), async (req, res) => {
         res.status(500).json({ error: "Server error updating profile." });
     }
 });
+
+// ------------------- POST /user/saveRecipe/:foodId ------------------- //
+router.post("/saveRecipe/:foodId", verifyToken, async (req, res) => {
+    try {
+        const { foodId } = req.params;
+        const user = await User.findById(req.userId);
+        if (!user) return res.status(404).json({ error: "User not found" });
+
+        // Find the food (for cuisine info)
+        const food = await Food.findById(foodId);
+        if (!food) return res.status(404).json({ error: "Food not found" });
+
+        // Prevent duplicates
+        if (user.savedRecipes.includes(foodId)) {
+            return res.status(400).json({ message: "Recipe already saved" });
+        }
+
+        // Save recipe
+        user.savedRecipes.push(foodId);
+
+        // Increment cuisine counters
+        if (food.cuisines && food.cuisines.length > 0) {
+            food.cuisines.forEach(cuisine => {
+                const currentCount = user.cuisineLikes.get(cuisine) || 0;
+                user.cuisineLikes.set(cuisine, currentCount + 1);
+            });
+        }
+
+        await user.save();
+
+        res.json({
+            message: "Recipe saved successfully",
+            savedRecipes: user.savedRecipes,
+            cuisineLikes: Object.fromEntries(user.cuisineLikes)
+        });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: "Failed to save recipe" });
+    }
+});
+
+// ------------------- GET /user/savedRecipes ------------------- //
+router.get("/savedRecipes", verifyToken, async (req, res) => {
+    try {
+        const user = await User.findById(req.userId).populate("savedRecipes");
+        if (!user) return res.status(404).json({ error: "User not found" });
+
+        res.json(user.savedRecipes);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: "Failed to fetch saved recipes" });
+    }
+});
+
+// ------------------- GET /user/topCuisines ------------------- //
+router.get("/topCuisines", verifyToken, async (req, res) => {
+    try {
+        const user = await User.findById(req.userId);
+        if (!user) return res.status(404).json({ error: "User not found" });
+
+        const cuisineData = Object.fromEntries(user.cuisineLikes);
+        const sorted = Object.entries(cuisineData)
+            .sort((a, b) => b[1] - a[1])
+            .map(([cuisine, count]) => ({ cuisine, count }));
+
+        res.json(sorted);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: "Failed to fetch cuisines" });
+    }
+});
+
+// ------------------- GET /user/savedRecipes ------------------- //
+router.get("/savedRecipes", verifyToken, async (req, res) => {
+    try {
+        const user = await User.findById(req.userId).populate("savedRecipes");
+        if (!user) return res.status(404).json({ error: "User not found" });
+
+        res.json(user.savedRecipes);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: "Failed to fetch saved recipes" });
+    }
+});
+
+
 
 module.exports = router;

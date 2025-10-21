@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import { FaBars } from "react-icons/fa";
 import "../styles/HomePage.css";
 
@@ -9,6 +10,11 @@ const HomePage = ({ isLoggedIn, setSidebarOpen }) => {
         { id: 2, name: "Jamie", sharedFood: "Pizza", image: "🍕" },
         { id: 3, name: "Taylor", sharedFood: "Pasta", image: "🍝" },
     ]);
+    const navigate = useNavigate();
+    const handleNavigate = (path) => {
+        console.log(isLoggedIn);
+        navigate(path);
+    };
 
     const scrollRef = useRef(null);
 
@@ -70,8 +76,10 @@ const HomePage = ({ isLoggedIn, setSidebarOpen }) => {
                     )}
 
 
-                    <div className="recipeCard viewMoreCard">
-                        <p className="viewMoreText">View More</p>
+                    <div className="recipeCard viewMoreCard" onClick={() => handleNavigate("/saved-foods")}>
+                        <p className="viewMoreText">
+                            View More
+                        </p>
                     </div>
                 </div>
             </div>

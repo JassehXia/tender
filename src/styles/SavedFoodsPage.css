@@ -1,0 +1,204 @@
+.savedFoodsPage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px;
+    color: white;
+    background-color: #121212;
+    min-height: 100vh;
+}
+
+/* Top bar */
+.profileTopBar {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    padding: 1rem 1.5rem;
+    background-color: #121212;
+    border-bottom: 1px solid #222;
+    box-sizing: border-box;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.profileTopBar .menuIcon {
+    font-size: 1.5rem;
+    cursor: pointer;
+    margin-right: 1rem;
+    color: #fff;
+}
+
+.profileTopBar .menuIcon:hover {
+    transform: scale(1.1);
+}
+
+.appTitle {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #fff;
+}
+
+/* Containers */
+.savedFoodsContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    width: 90%;
+}
+
+/* Boxes */
+.savedFoodsBox,
+.topCuisinesBox {
+    display: flex;
+    flex-direction: column;
+}
+
+.savedFoodsTitle,
+.topCuisinesTitle {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.scrollContainer {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.scrollBtn {
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    z-index: 10;
+    transition: background-color 0.2s;
+}
+
+.scrollBtn:hover {
+    background-color: #555;
+}
+
+.scrollBtn.left {
+    left: -18px;
+    /* slightly outside container */
+}
+
+.scrollBtn.right {
+    right: -18px;
+}
+
+.savedFoodsScroll,
+.topCuisinesScroll {
+    display: flex;
+    overflow-x: hidden;
+    /* hide native scrollbar */
+    gap: 20px;
+    padding: 10px 0;
+    scroll-behavior: smooth;
+    width: 100%;
+}
+
+
+.savedFoodsScroll::-webkit-scrollbar,
+.topCuisinesScroll::-webkit-scrollbar {
+    height: 8px;
+}
+
+.savedFoodsScroll::-webkit-scrollbar-thumb,
+.topCuisinesScroll::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+}
+
+/* Cards */
+.recipeCard,
+.cuisineCard {
+    flex: 0 0 200px;
+    height: 220px;
+    background-color: #1e1e1e;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 10px;
+    transition: transform 0.2s ease-in-out;
+}
+
+.recipeCard:hover,
+.cuisineCard:hover {
+    transform: scale(1.05);
+}
+
+.cuisineCard {
+    position: relative;
+    /* for badge positioning */
+    flex: 0 0 200px;
+    height: 220px;
+    background-color: #1e1e1e;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 10px;
+    transition: transform 0.2s ease-in-out;
+}
+
+.cuisineCard:hover {
+    transform: scale(1.05);
+}
+
+/* Badge for count */
+.cuisineBadge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #ff6b6b;
+    color: #fff;
+    font-weight: bold;
+    font-size: 0.8rem;
+    padding: 5px 8px;
+    border-radius: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+
+.recipeCardImg {
+    width: 100%;
+    height: 130px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.recipeName,
+.cuisineName {
+    font-weight: bold;
+    margin-top: 8px;
+}
+
+.recipeCuisine,
+.cuisineCount {
+    font-size: 0.9rem;
+    color: #ccc;
+}
+
+.emptyMessage {
+    color: #bbb;
+    font-style: italic;
+}

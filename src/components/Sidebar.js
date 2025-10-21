@@ -32,7 +32,11 @@ const Sidebar = ({ isOpen, onClose, isLoggedIn }) => {
                 {/* Menu items */}
                 <ul className="sidebarMenu">
                     <li onClick={() => handleNavigate("/")}>🏠 Home</li>
-                    <li onClick={() => handleNavigate(isLoggedIn ? "/profile" : "/account")}>👤 Profile</li>
+                    <li onClick={() => handleNavigate(isLoggedIn ? "/profile" : "/account")}>
+                        {isLoggedIn ? "👤 Profile" : "👤 Login"}</li>
+                    {isLoggedIn && (
+                        <li onClick={() => handleNavigate("/saved-foods")}>📖 Saved Foods</li>
+                    )}
                     <li onClick={() => handleNavigate("/explore")}>🍽️ Explore</li>
                     <li onClick={() => handleNavigate("/friends")}>👥 Friends</li>
                     <li onClick={() => handleNavigate("/settings")}>⚙️ Settings</li>

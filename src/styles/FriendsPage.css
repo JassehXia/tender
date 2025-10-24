@@ -1,0 +1,175 @@
+.friendsPage {
+    background-color: #121212;
+    color: white;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px 20px;
+    font-family: 'Arial', sans-serif;
+}
+
+/* Top Bar */
+.friendsTopBar {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 1rem 1.5rem;
+    background-color: #121212;
+    border-bottom: 1px solid #222;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.friendsTopBar .menuIcon {
+    font-size: 1.8rem;
+    cursor: pointer;
+    color: white;
+    margin-right: 1rem;
+}
+
+.friendsTopBar .menuIcon:hover {
+    color: #ff7b00;
+    transform: scale(1.05);
+    transition: all 0.2s ease-in-out;
+}
+
+.friendsTopBar .appTitle {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: white;
+}
+
+/* Search Bar */
+.searchContainer {
+    width: 100%;
+    max-width: 500px;
+    margin: 20px 0;
+    display: flex;
+    gap: 10px;
+}
+
+.searchContainer input {
+    flex: 1;
+    padding: 12px;
+    border-radius: 8px;
+    border: none;
+    background-color: #1e1e1e;
+    color: white;
+    font-size: 1rem;
+}
+
+.searchContainer input:focus {
+    outline: 2px solid #ff7b00;
+}
+
+.primaryBtn {
+    background-color: #ff7b00;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.primaryBtn:hover {
+    background-color: #ff9533;
+}
+
+/* Friend Cards */
+.friendCard {
+    background-color: #1e1e1e;
+    border-radius: 12px;
+    padding: 15px;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: transform 0.2s ease-in-out;
+}
+
+.friendCard:hover {
+    transform: scale(1.02);
+}
+
+.friendInfo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.friendAvatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #2a2a2a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+}
+
+.friendName {
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+/* Actions Buttons */
+.friendActions {
+    display: flex;
+    gap: 8px;
+}
+
+.acceptBtn {
+    background-color: #28a745;
+}
+
+.acceptBtn:hover {
+    background-color: #3ec46d;
+}
+
+.declineBtn {
+    background-color: #dc3545;
+}
+
+.declineBtn:hover {
+    background-color: #e4606d;
+}
+
+.removeBtn {
+    background-color: #555;
+}
+
+.removeBtn:hover {
+    background-color: #777;
+}
+
+/* Empty Message */
+.emptyMessage {
+    color: #bbb;
+    font-style: italic;
+    text-align: center;
+    margin-top: 30px;
+}
+
+/* Scrollable Friends List */
+.friendsList {
+    width: 100%;
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+}
+
+.search-button {
+    background-color: #ff7b00;
+    color: #ff6b6b;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 16px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}

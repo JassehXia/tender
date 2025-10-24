@@ -7,6 +7,7 @@ import Sidebar from "./components/Sidebar";
 import ProfilePage from "./pages/ProfilePage";
 import EditProfilePage from "./pages/EditProfilePage";
 import SavedFoodsPage from "./pages/SavedFoodsPage";
+import FriendsPage from "./pages/FriendsPage";
 import { AuthContext } from "./context/AuthContext"; // ✅ import contex
 
 function App() {
@@ -71,6 +72,16 @@ function App() {
             path="/saved-foods"
             element={
               <SavedFoodsPage
+                isLoggedIn={isLoggedIn}
+                sidebarOpen={sidebarOpen}
+                setSidebarOpen={setSidebarOpen}
+              />
+            }
+          />
+          <Route
+            path="/friends"
+            element={
+              <FriendsPage
                 isLoggedIn={isLoggedIn}
                 sidebarOpen={sidebarOpen}
                 setSidebarOpen={setSidebarOpen}

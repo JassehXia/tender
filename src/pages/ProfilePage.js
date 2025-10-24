@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState, useContext, use } from "react";
 import Sidebar from "../components/Sidebar";
 import "../styles/ProfilePage.css";
 import { useNavigate } from "react-router-dom";
@@ -26,6 +26,7 @@ export default function ProfilePage() {
                 });
                 const data = await res.json();
                 if (res.ok || res.status === 200) {
+                    console.log("Fetched user data:", data);
                     setUser(data);
                 } else {
                     console.error(data.error);
@@ -72,7 +73,7 @@ export default function ProfilePage() {
                         <p className="statLabel">Friends</p>
                     </div>
                     <div className="statCard">
-                        <p className="statNumber">{user.liked?.length || 0}</p>
+                        <p className="statNumber">{user.savedRecipes?.length || 0}</p>
                         <p className="statLabel">Liked Recipes</p>
                     </div>
                 </div>

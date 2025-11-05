@@ -119,6 +119,47 @@ router.get("/savedRecipes", verifyToken, async (req, res) => {
     }
 });
 
+// ------------------- DELETE /user/removeRecipe/:foodId ------------------- //
+router.delete("/removeRecipe/:foodId", verifyToken, async (req, res) => {
+    try {
+        const { foodId } = req.params;
+        const user = await User.findById(req.userId);
+        if (!user) return res.status(404).json({ error: "User not found" });
+
+        // Find the food (for cuisine info)
+        const food = await Food.findById(foodId);
+        if (!food) return res.status(404).json({ error: "Food not found" });
+
+        // Prevent duplicates
+        if (!user.savedRecipes.includes(foodId)) {
+            return res.status(400).json({ message: "Recipe not saved" });
+        }
+
+        // Remove recipe (compare ObjectIds as strings)
+        user.savedRecipes = user.savedRecipes.filter(id => id.toString() !== foodId);
+
+
+        // Decrement cuisine counters
+        if (food.cuisines && food.cuisines.length > 0) {
+            food.cuisines.forEach(cuisine => {
+                const currentCount = user.cuisineLikes.get(cuisine) || 0;
+                user.cuisineLikes.set(cuisine, currentCount - 1);
+            });
+        }
+
+        await user.save();
+
+        res.json({
+            message: "Recipe removed successfully",
+            savedRecipes: user.savedRecipes,
+            cuisineLikes: Object.fromEntries(user.cuisineLikes)
+        });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: "Failed to remove recipe" });
+    }
+});
+
 // ------------------- GET /user/topCuisines ------------------- //
 router.get("/topCuisines", verifyToken, async (req, res) => {
     try {

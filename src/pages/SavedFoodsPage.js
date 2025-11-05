@@ -40,6 +40,33 @@ function SavedFoodsPage() {
             .catch(err => console.error(err));
     }, []);
 
+    const deleteRecipe = async (foodId) => {
+        const token = localStorage.getItem("token");
+        if (!token) return console.warn("No token found — user not logged in");
+
+        try {
+            const res = await fetch(`http://localhost:5000/user/removeRecipe/${foodId}`, {
+                method: "DELETE",
+                headers: {
+                    "Authorization": `Bearer ${token}`,
+                },
+            });
+
+            const data = await res.json();
+            if (!res.ok) throw new Error(data.error || data.message);
+
+            console.log("✅ Recipe removed:", data.message);
+
+            // Instantly update the UI
+            setSavedRecipes(prev => prev.filter(r => r._id !== foodId));
+        } catch (err) {
+            console.error("❌ Error deleting recipe:", err.message);
+        }
+    };
+
+
+
+
     // Lock vertical scroll while hovering horizontal scroll
     const handleWheel = (e, ref) => {
         if (ref.current) {
@@ -81,6 +108,14 @@ function SavedFoodsPage() {
                             ) : (
                                 savedRecipes.map((recipe) => (
                                     <div key={recipe._id} className="recipeCard">
+                                        <button
+                                            className="deleteBtn"
+                                            onClick={() => deleteRecipe(recipe._id)}
+                                            title="Remove recipe"
+                                        >
+                                            ✕
+                                        </button>
+
                                         {recipe.image ? (
                                             <img
                                                 src={recipe.image.startsWith("/uploads")
@@ -92,11 +127,13 @@ function SavedFoodsPage() {
                                         ) : (
                                             <div className="recipePlaceholder">{recipe.name}</div>
                                         )}
+
                                         <p className="recipeName">{recipe.name}</p>
                                         <p className="recipeCuisine">{recipe.cuisines?.join(", ")}</p>
                                     </div>
                                 ))
                             )}
+
                         </div>
                         <button
                             className="scrollBtn right"

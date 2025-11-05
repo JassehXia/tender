@@ -94,7 +94,6 @@ const FriendsPage = ({ setSidebarOpen }) => {
 
     return (
         <div className="friendsPage">
-            {/* Top bar */}
 
             {/* Top bar */}
             <div className="profileTopBar">

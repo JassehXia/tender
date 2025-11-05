@@ -202,3 +202,27 @@
     color: #bbb;
     font-style: italic;
 }
+
+.deleteBtn {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: rgba(255, 75, 75, 0.9);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.2s ease;
+    z-index: 5;
+}
+
+.deleteBtn:hover {
+    background: rgba(255, 0, 0, 1);
+}
+
+.recipeCard {
+    position: relative;
+}

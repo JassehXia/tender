@@ -10,6 +10,8 @@ function SavedFoodsPage() {
     const [sidebarOpen, setSidebarOpen] = useState(false);
     const [savedRecipes, setSavedRecipes] = useState([]);
     const [topCuisines, setTopCuisines] = useState([]);
+    const [confirmModal, setConfirmModal] = useState({ open: false, foodId: null });
+
 
     const recipesRef = useRef(null);
     const cuisinesRef = useRef(null);
@@ -64,6 +66,21 @@ function SavedFoodsPage() {
         }
     };
 
+    const handleDeleteClick = (foodId) => {
+        setConfirmModal({ open: true, foodId });
+    };
+
+    const confirmDelete = async () => {
+        if (!confirmModal.foodId) return;
+        await deleteRecipe(confirmModal.foodId);
+        setConfirmModal({ open: false, foodId: null });
+    };
+
+    const cancelDelete = () => {
+        setConfirmModal({ open: false, foodId: null });
+    };
+
+
 
 
 
@@ -110,7 +127,7 @@ function SavedFoodsPage() {
                                     <div key={recipe._id} className="recipeCard">
                                         <button
                                             className="deleteBtn"
-                                            onClick={() => deleteRecipe(recipe._id)}
+                                            onClick={() => handleDeleteClick(recipe._id)}
                                             title="Remove recipe"
                                         >
                                             ✕
@@ -177,6 +194,19 @@ function SavedFoodsPage() {
                 </div>
 
             </div>
+            {confirmModal.open && (
+                <div className="modalOverlay" onClick={cancelDelete}>
+                    <div className="modalBox" onClick={(e) => e.stopPropagation()}>
+                        <h3>Remove Recipe?</h3>
+                        <p>This will delete the recipe from your saved list.</p>
+                        <div className="modalButtons">
+                            <button className="cancelBtn" onClick={cancelDelete}>Cancel</button>
+                            <button className="confirmBtn" onClick={confirmDelete}>Delete</button>
+                        </div>
+                    </div>
+                </div>
+            )}
+
         </div>
     );
 }

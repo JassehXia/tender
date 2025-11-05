@@ -201,6 +201,7 @@
 .emptyMessage {
     color: #bbb;
     font-style: italic;
+    margin-left: 30px;
 }
 
 .deleteBtn {
@@ -225,4 +226,67 @@
 
 .recipeCard {
     position: relative;
+}
+
+/* Confirmation Modal */
+/* Modal overlay */
+.modalOverlay {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+/* Modal box */
+.modalBox {
+    background: #1c1c1c;
+    color: #fff;
+    padding: 24px 32px;
+    border-radius: 16px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+    text-align: center;
+    max-width: 320px;
+}
+
+.modalBox h3 {
+    margin-bottom: 8px;
+    font-size: 20px;
+}
+
+.modalBox p {
+    font-size: 14px;
+    color: #ccc;
+    margin-bottom: 20px;
+}
+
+.modalButtons {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+}
+
+.cancelBtn,
+.confirmBtn {
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+}
+
+.cancelBtn {
+    background: #444;
+    color: #fff;
+}
+
+.confirmBtn {
+    background: #ff4d4f;
+    color: white;
+}
+
+.confirmBtn:hover {
+    background: #e04344;
 }
